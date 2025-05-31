@@ -25,8 +25,8 @@ Garmin Activity Reporter is a modern web application built with React and TypeSc
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/neonll/garmin-activity-reporter.git
-   cd garmin-activity-reporter
+   git clone https://github.com/neonll/gconnect-react.git
+   cd gconnect-react
    ```
 
 2. Install dependencies:
