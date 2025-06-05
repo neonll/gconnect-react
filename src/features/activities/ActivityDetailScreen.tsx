@@ -86,7 +86,7 @@ const ActivityDetailScreen: React.FC = () => {
     return null;
   }
   
-  const activityTitle = `${formatDate(selectedActivity.startTimeLocal)} ${formatDistance(selectedActivity.distance)}km ${selectedActivity.activityName}`;
+  const activityTitle = `${formatDate(selectedActivity.startTimeLocal)} ${selectedActivity.activityName} ${formatDistance(selectedActivity.distance)} km`;
   
   return (
     <Container maxWidth="md">

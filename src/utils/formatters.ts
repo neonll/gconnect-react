@@ -23,7 +23,7 @@ export function formatPace(speedMps: number | undefined): string {
   const seconds = Math.floor(secondsPerKm % 60);
   
   // Format as MM:SS
-  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
 // Format duration in seconds to HH:MM:SS or MM:SS
@@ -71,23 +71,23 @@ export function generateReportText(
   const elevationGainInt = roundToInt(activity.elevationGain || 0);
   
   // Format weather emojis
-  const weatherEmojis = Object.entries(weatherConditions)
+  const weatherDetails = Object.entries(weatherConditions)
     .filter(([_, isSelected]) => isSelected)
     .map(([condition, _]) => {
       switch (condition) {
-        case 'strongWind': return '💨';
-        case 'lightRain': return '🌦️';
-        case 'strongRain': return '🌧️';
-        case 'storm': return '⛈️';
-        case 'snow': return '🌨️';
+        case 'strongWind': return 'сильный ветер';
+        case 'lightRain': return 'легкий дождь';
+        case 'strongRain': return 'дождь';
+        case 'storm': return 'ливень';
+        case 'snow': return 'снег';
         default: return '';
       }
     })
-    .join(' ');
+    .join(', ');
   
   // Generate the report text
   return `${distanceKm} км, ${averageHRInt} пульс, ${paceMinSec}/км,
-${durationFormatted}, ${elevationGainInt} м набор, ${temperature}°C, ${weatherEmojis}.
+${durationFormatted}, ${elevationGainInt} м набор${temperature ? ', ' + temperature + '°C': ''}${weatherDetails ? ', ' + weatherDetails : ''}.
 Ощущения: ${effortLevel}.
-Комментарий: ${comments}`;
+${comments}`;
 }
