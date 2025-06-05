@@ -10,11 +10,11 @@ interface ActivityListProps {
   onActivitySelect: (activity: Activity) => void;
 }
 
-const ActivityList: React.FC<ActivityListProps> = ({ 
-  activities, 
-  isLoading, 
-  error, 
-  onActivitySelect 
+const ActivityList: React.FC<ActivityListProps> = ({
+  activities,
+  isLoading,
+  error,
+  onActivitySelect
 }) => {
   if (isLoading) {
     return (
@@ -47,16 +47,19 @@ const ActivityList: React.FC<ActivityListProps> = ({
   return (
     <Box my={4}>
       <Typography variant="h6" gutterBottom>
-        Latest Activities
+        Activities
       </Typography>
       <Grid container spacing={2}>
-        {activities.map((activity) => (
-          <Grid item xs={12} sm={6} md={4} key={activity.activityId}>
+        {activities.map((activity: Activity) => (
+          <Grid item xs={12} key={activity.activityId}>
             <Card>
-              <CardActionArea onClick={() => onActivitySelect(activity)}>
+              <CardActionArea
+                onClick={() => activity.activityType.typeKey === 'running' ? onActivitySelect(activity) : null}
+                disabled={activity.activityType.typeKey !== 'running'}
+              >
                 <CardContent>
                   <Typography variant="body1">
-                    {formatDate(activity.startTimeLocal)} {formatDistance(activity.distance)}km {activity.activityName}
+                    {formatDate(activity.startTimeLocal)} {activity.activityName} {activity.activityType.typeKey === 'running' ? formatDistance(activity.distance) + ' km' : ''}
                   </Typography>
                 </CardContent>
               </CardActionArea>
